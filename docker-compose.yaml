@@ -1,0 +1,16 @@
+version: '3'
+services:
+  dnsmasq:
+    image: guoquan9907/dnsmasq:v1
+    privileged: true
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+    - ./dnsmasq.d/:/etc/dnsmasq.d/
+    - ./chnlist.txt:/chinadns-ng/chnlist.txt
+    - ./gfwlist.txt:/chinadns-ng/gfwlist.txt
+    - ./chnroute.ipset:/chinadns-ng/chnroute.ipset
+    - ./chinadns-ng.sh:/chinadns-ng/chinadns-ng.sh
+    restart: unless-stopped
+    network_mode: "host"
